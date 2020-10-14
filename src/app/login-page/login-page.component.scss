@@ -1,0 +1,28 @@
+.form-control {
+  max-width: 400px;
+  margin: 200px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+input[type='text'],
+input[type='email'],
+input[type='password'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+}
+.validation {
+    color: red;
+    font-family: 'Roboto Regular', sans-serif;
+    font-weight: bold;
+}
+

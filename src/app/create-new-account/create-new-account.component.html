@@ -1,0 +1,65 @@
+<form class="form-control" [formGroup]="form" (ngSubmit)="createNewAccount()">
+  <h1>Create new account</h1>
+
+  <div class="form-field">
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" formControlName="username">
+
+    <div
+      *ngIf="form.get('username').invalid && form.get('username').touched"
+      class="validation">
+
+      <small *ngIf="form.get('username').errors.required">
+        Поле username не может быть пустым
+      </small>
+
+      <small *ngIf="form.get('username').errors.pattern">
+        Введите корректный username
+      </small>
+
+    </div>
+
+  </div>
+
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input id="email" type="text" name="email" formControlName="email">
+
+    <div
+      *ngIf="form.get('email').invalid && form.get('email').touched"
+      class="validation">
+
+      <small *ngIf="form.get('email').errors.required">
+        Поле Email не может быть пустым
+      </small>
+
+      <small *ngIf="form.get('email').errors.pattern">
+        Введите корректный Email
+      </small>
+    </div>
+
+  </div>
+
+  <div class="form-field">
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" formControlName="password">
+
+    <div
+      *ngIf="form.get('password').invalid && form.get('password').touched"
+      class="validation">
+
+      <small *ngIf="form.get('password').errors.required">
+        Пароль не может быть пустым
+      </small>
+
+      <small *ngIf="form.get('password').errors.pattern">
+        Введите корректный пароль
+      </small>
+
+    </div>
+  </div>
+
+  <div>
+    <button type="button" [routerLink]="['/create-account']">Create new account</button>
+  </div>
+</form>
