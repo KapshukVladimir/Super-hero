@@ -1,0 +1,52 @@
+.overlay {
+  background: rgba(0, 0, 0, .7);
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal {
+  position: absolute;
+  top: calc(60% - 25%);
+  left: calc(60% - 25%);
+  width: 30%;
+  height: 30%;
+  background: white;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 25px;
+
+  & .btn-close {
+    background: transparent;
+    color: #000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  & .modal-body {
+    text-align: center;
+    padding: 2rem 3rem;
+    & .btn-ok {
+      background: green;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+}
+

@@ -1,0 +1,9 @@
+<form class="form-control" [formGroup]="searchForm" (ngSubmit)="submit($event)">
+
+  <input class="input-field" type="text" name="name" formControlName="inputField">
+  <div class="validation" *ngIf="!searchForm.invalid">
+    <small>
+      Допустимы только буквы
+    </small>
+  </div>
+</form>

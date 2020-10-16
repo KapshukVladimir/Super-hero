@@ -1,0 +1,19 @@
+.form-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Roboto Regular", sans-serif;
+  margin-top: 2rem;
+  & .input-field {
+    width: 35%;
+    padding: .7rem 2.3rem .7rem .7rem;
+    border-radius: 3px;
+    outline-color: deepskyblue;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png") no-repeat top right;
+    background-size: contain;
+  }
+  & .validation {
+    color: red;
+  }
+}

@@ -2,7 +2,8 @@
   <h1>Sign in</h1>
   <div class="form-field">
     <label for="email">Email</label>
-    <input id="email" type="text" name="email" formControlName="email">
+    <input
+      id="email" type="text" name="email" formControlName="email">
 
     <div
       *ngIf="form.get('email').invalid && form.get('email').touched"
@@ -38,7 +39,32 @@
     </div>
   </div>
   <div>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-login">Sign in</button>
-    <button type="button" [routerLink]="['/create-account']">Create new account</button>
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="btn btn-login"
+    >
+      Sign in
+    </button>
+    <button
+      class="btn-create"
+      type="button"
+      [routerLink]="['/create-account']"
+    >
+      Create new account
+    </button>
+  </div>
+
+  <div *ngIf="!entry">
+    <div class="validation">Нет такого пользователя.
+      <a [routerLink]="['/create-account']">Нет аккаунта? Зарегистрируйтесь.</a>
+    </div>
   </div>
 </form>
+
+<app-modal *ngIf="showModal" [(opened)]="showModal">
+  <h3>
+    Your current session has expired. Please login
+    again to continue using this app!
+  </h3>
+</app-modal>

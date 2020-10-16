@@ -5,17 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CreateNewAccountComponent } from './create-new-account/create-new-account.component';
+import { HeroesPageComponent } from './heroes-page/heroes-page.component';
+import { ModalComponent } from './modal/modal.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     HomePageComponent,
-    CreateNewAccountComponent
+    CreateNewAccountComponent,
+    HeroesPageComponent,
+    ModalComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,6 @@ import { CreateNewAccountComponent } from './create-new-account/create-new-accou
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -8,11 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
+  entry = true;
+  showModal = false;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  constructor(private router: Router) {
     this.form = new FormGroup({
         email: new FormControl('', [
           Validators.required,
@@ -21,18 +21,44 @@ export class LoginPageComponent implements OnInit {
         password: new FormControl(null, [
           Validators.minLength(5),
           Validators.required,
-          Validators.pattern('(?=.*[\\d])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[\\d\\w!@#$%^&*]{6,}')
+          Validators.pattern('(?=.*[\\d])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[\\d\\w!@#$%^&*]{5,}')
         ])
       }
     );
   }
 
+  ngOnInit(): void {
+    if (sessionStorage.getItem('flag')) {
+      this.showModal = true;
+      sessionStorage.clear();
+    }
+  }
+
+  createToken(): string {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 15; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
   signIn(): void {
-    const user = {
-      email: this.form.value.email,
-      password: this.form.value.password
+    const token = {
+      idToken: this.createToken(),
+      expire: Date.now()
     };
-    console.log(user);
-    this.form.reset();
+    sessionStorage.setItem('token', JSON.stringify(token));
+    const users = JSON.parse(localStorage.getItem('users'));
+    users.forEach(el => {
+      if (el.email === this.form.value.email && el.password === this.form.value.password) {
+        this.entry = true;
+        this.router.navigate(['/heroes-page']);
+        this.form.reset();
+      } else {
+        this.entry = false;
+      }
+    });
   }
 }
