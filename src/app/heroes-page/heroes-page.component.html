@@ -1,6 +1,8 @@
 <form class="form-control" [formGroup]="searchForm" (ngSubmit)="submit($event)">
-
-  <input class="input-field" type="text" name="name" formControlName="inputField">
+  <div class="group">
+    <app-alphabetical-select (newLetter)="changeInput($event)"></app-alphabetical-select>
+    <input class="input-field" type="text" name="name" formControlName="inputField">
+  </div>
   <div class="validation" *ngIf="!searchForm.invalid">
     <small>
       Допустимы только буквы
@@ -10,9 +12,11 @@
 </form>
 
 <div class="recent-searches">
-  <div class="recent-item" *ngFor="let item of recentSearches" (click)="resentQuery()">
+  <div class="recent-item" *ngFor="let item of recentSearches" (click)="resentQuery($event, item)">
     {{ item }},
   </div>
 </div>
+
+
 
 <app-heroes-list [responseArray]="responseArray"></app-heroes-list>

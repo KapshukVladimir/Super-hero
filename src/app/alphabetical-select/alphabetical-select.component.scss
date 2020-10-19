@@ -1,0 +1,31 @@
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .alphabet-list {
+    list-style: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 400px;
+    display: flex;
+    left: 10%;
+    top: 10%;
+
+  }
+  & .letter {
+    font-size: 3rem;
+    background: indigo;
+    border-radius: 50%;
+    text-align: center;
+    padding: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    width: 30px;
+    height: 30px;
+  }
+}

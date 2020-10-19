@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <div>
+    <div class="letter" (click)="chooseLetter()">{{ item | uppercase }}</div>
+  </div>
+  <ul class="alphabet-list" *ngIf="showAlphabetical">
+    <app-alphabetical-item *ngFor="let item of alphabetical" (newLetter)="changeLetter($event)" [item]="item">
+    </app-alphabetical-item>
+  </ul>
+</div>

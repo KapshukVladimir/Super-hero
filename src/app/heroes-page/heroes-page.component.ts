@@ -50,7 +50,7 @@ export class HeroesPageComponent implements OnInit {
     const currentToken = JSON.parse(sessionStorage.getItem('token'));
     const dateNow = Date.now();
     const loginTime = dateNow - currentToken.expire;
-    if (loginTime > 500000000000000) {
+    if (loginTime > 5000000000000000000000) {
       return true;
     }
   }
@@ -67,7 +67,18 @@ export class HeroesPageComponent implements OnInit {
     this.searchForm.reset();
   }
 
-  resentQuery(): void {
+  resentQuery(event, item): void {
+    this.searchForm.get('inputField').setValue(item);
+  }
 
+
+  changeInput(event): void {
+    this.searchForm.get('inputField').setValue(event);
+
+    this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
+      .subscribe((responseArray: any) => {
+        this.responseArray = responseArray.results;
+        console.log(this.responseArray);
+      });
   }
 }

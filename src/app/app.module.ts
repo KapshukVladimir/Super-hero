@@ -14,6 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { HeroesItemComponent } from './heroes-list/heroes-item/heroes-item.component';
+import { AlphabeticalSelectComponent } from './alphabetical-select/alphabetical-select.component';
+import { AlphabeticalItemComponent } from './alphabetical-select/alphabetical-item/alphabetical-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { HeroesItemComponent } from './heroes-list/heroes-item/heroes-item.compo
     ModalComponent,
     HeaderComponent,
     HeroesListComponent,
-    HeroesItemComponent
+    HeroesItemComponent,
+    AlphabeticalSelectComponent,
+    AlphabeticalItemComponent
   ],
   imports: [
     BrowserModule,
