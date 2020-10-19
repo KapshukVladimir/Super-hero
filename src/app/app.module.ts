@@ -16,6 +16,8 @@ import { HeroesListComponent } from './heroes-list/heroes-list.component';
 import { HeroesItemComponent } from './heroes-list/heroes-item/heroes-item.component';
 import { AlphabeticalSelectComponent } from './alphabetical-select/alphabetical-select.component';
 import { AlphabeticalItemComponent } from './alphabetical-select/alphabetical-item/alphabetical-item.component';
+import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AlphabeticalItemComponent } from './alphabetical-select/alphabetical-it
     HeroesListComponent,
     HeroesItemComponent,
     AlphabeticalSelectComponent,
-    AlphabeticalItemComponent
+    AlphabeticalItemComponent,
+    UserInfoPageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { AlphabeticalItemComponent } from './alphabetical-select/alphabetical-it
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
