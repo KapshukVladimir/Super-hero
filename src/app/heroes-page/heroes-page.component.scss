@@ -1,3 +1,4 @@
+
 .form-control {
   display: flex;
   justify-content: center;
@@ -6,7 +7,7 @@
   font-family: "Roboto Regular", sans-serif;
   margin-top: 2rem;
   & .input-field {
-    width: 35%;
+    width: 45%;
     padding: .7rem 2.3rem .7rem .7rem;
     border-radius: 3px;
     outline-color: deepskyblue;
@@ -17,3 +18,9 @@
     color: red;
   }
 }
+.recent-searches {
+  width: 600px;
+  margin: 1.5rem auto;
+  display: flex;
+}
+

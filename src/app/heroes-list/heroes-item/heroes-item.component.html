@@ -1,0 +1,21 @@
+<li class="hero-card">
+  <div class="left">
+    <div class="title">
+      <h2>{{ hero.name }}</h2>
+    </div>
+    <div class="image">
+      <img src="{{ hero.image.url }}" alt="hero">
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="powerstats">
+      <div>Power: <strong>{{ hero.powerstats.power }}</strong></div>
+      <div>Strength: <strong>{{ hero.powerstats.strength }}</strong></div>
+      <div>Speed: <strong>{{ hero.powerstats.speed  }}</strong></div>
+      <div>Durability: <strong>{{ hero.powerstats.durability }}</strong></div>
+      <div>Combat: <strong>{{ hero.powerstats.combat }}</strong></div>
+    </div>
+    <button class="btn-choose" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
+  </div>
+</li>

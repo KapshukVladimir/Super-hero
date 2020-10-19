@@ -1,6 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface ResponseArray {
+  id: string;
+  name: string;
+  powerstats: object;
+  biography: object;
+  appearance: object;
+  work: object;
+  connections: object;
+  image: object;
+}
 
 @Component({
   selector: 'app-heroes-page',
@@ -10,8 +23,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class HeroesPageComponent implements OnInit {
   timeOver: boolean;
   searchForm: FormGroup;
+  recentSearches = [];
+  responseArray = [];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {
     this.searchForm = new FormGroup({
       inputField: new FormControl('', [
         Validators.required,
@@ -26,14 +44,12 @@ export class HeroesPageComponent implements OnInit {
       sessionStorage.setItem('flag', JSON.stringify(this.timeOver));
       this.router.navigate(['/login']);
     }
-
   }
 
   isAliveToken(): boolean {
     const currentToken = JSON.parse(sessionStorage.getItem('token'));
     const dateNow = Date.now();
     const loginTime = dateNow - currentToken.expire;
-    console.log(currentToken);
     if (loginTime > 500000000000000) {
       return true;
     }
@@ -41,5 +57,17 @@ export class HeroesPageComponent implements OnInit {
 
   submit(event): void {
     event.preventDefault();
+    this.recentSearches = [...this.recentSearches, this.searchForm.value.inputField];
+    this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
+      .subscribe((responseArray: any) => {
+        this.responseArray = responseArray.results;
+        console.log(this.responseArray);
+      });
+
+    this.searchForm.reset();
+  }
+
+  resentQuery(): void {
+
   }
 }

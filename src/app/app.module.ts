@@ -11,6 +11,9 @@ import { CreateNewAccountComponent } from './create-new-account/create-new-accou
 import { HeroesPageComponent } from './heroes-page/heroes-page.component';
 import { ModalComponent } from './modal/modal.component';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HeroesListComponent } from './heroes-list/heroes-list.component';
+import { HeroesItemComponent } from './heroes-list/heroes-item/heroes-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { HeaderComponent } from './header/header.component';
     CreateNewAccountComponent,
     HeroesPageComponent,
     ModalComponent,
-    HeaderComponent
+    HeaderComponent,
+    HeroesListComponent,
+    HeroesItemComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +33,7 @@ import { HeaderComponent } from './header/header.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

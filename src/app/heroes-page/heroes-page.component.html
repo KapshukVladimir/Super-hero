@@ -6,4 +6,13 @@
       Допустимы только буквы
     </small>
   </div>
+
 </form>
+
+<div class="recent-searches">
+  <div class="recent-item" *ngFor="let item of recentSearches" (click)="resentQuery()">
+    {{ item }},
+  </div>
+</div>
+
+<app-heroes-list [responseArray]="responseArray"></app-heroes-list>
