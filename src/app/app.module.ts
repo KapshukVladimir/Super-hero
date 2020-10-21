@@ -20,6 +20,8 @@ import { UserInfoPageComponent } from './user-info-page/user-info-page.component
 import { MatTabsModule } from '@angular/material/tabs';
 import { ExitGuardComponent } from './heroes-page/exit-guard/exit-guard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatTableModule } from '@angular/material/table';
+import { SortPipe } from './shared/pipes/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeroesItemComponent,
     AlphabeticalSelectComponent,
     AlphabeticalItemComponent,
-    UserInfoPageComponent
+    UserInfoPageComponent,
+    SortPipe
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     MatTabsModule,
-    NgbModule
+    NgbModule,
+    MatTableModule
   ],
   providers: [ExitGuardComponent],
   bootstrap: [AppComponent]
