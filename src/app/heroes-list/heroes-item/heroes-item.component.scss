@@ -54,6 +54,9 @@
       &:disabled {
         background: #cacaca;
       }
+      &.active {
+        background: orange;
+      }
     }
   }
 }

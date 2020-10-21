@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeroesListComponent implements OnInit {
   @Input() responseArray;
+  @Input() string;
+
   constructor() { }
 
   ngOnInit(): void {

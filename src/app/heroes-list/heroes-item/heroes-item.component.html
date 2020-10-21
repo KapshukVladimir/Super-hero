@@ -9,13 +9,12 @@
   </div>
 
   <div class="right">
-    <div class="powerstats">
-      <div>Power: <strong>{{ hero.powerstats.power }}</strong></div>
-      <div>Strength: <strong>{{ hero.powerstats.strength }}</strong></div>
-      <div>Speed: <strong>{{ hero.powerstats.speed  }}</strong></div>
-      <div>Durability: <strong>{{ hero.powerstats.durability }}</strong></div>
-      <div>Combat: <strong>{{ hero.powerstats.combat }}</strong></div>
+    <div class="powerstats" *ngFor="let key of objectKeys(hero.powerstats)">
+      <div>{{ key | titlecase }} <strong>{{ hero.powerstats[key] }}</strong></div>
     </div>
-    <button class="btn-choose" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
+    <button class="btn-choose" *ngIf="isHeroPage else anotherBtn" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
+    <ng-template #anotherBtn>
+      <button class="btn-choose" [class.active]="hero.isSelected" (click)="selectedHero()">{{ btnText }}</button>
+    </ng-template>
   </div>
 </li>

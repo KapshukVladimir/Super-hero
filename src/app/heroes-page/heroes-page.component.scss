@@ -1,12 +1,12 @@
 
-.form-control {
+.form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-family: "Roboto Regular", sans-serif;
   margin-top: 2rem;
-  & .group {
+  & .my-group {
     display: flex;
     justify-content: center;
     width: 100%;

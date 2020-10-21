@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ComponentCanDeactivate } from './exit-guard/exit-guard.component';
 
 export interface ResponseArray {
   id: string;
@@ -20,11 +21,13 @@ export interface ResponseArray {
   templateUrl: './heroes-page.component.html',
   styleUrls: ['./heroes-page.component.scss']
 })
-export class HeroesPageComponent implements OnInit {
+export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
   timeOver: boolean;
   searchForm: FormGroup;
   recentSearches = [];
   responseArray = [];
+  selectedHeroes: object[] = [];
+  heroPage = 'heroPage';
 
   constructor(
     private router: Router,
@@ -39,6 +42,7 @@ export class HeroesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.removeItem('userHero');
     if (this.isAliveToken()) {
       this.timeOver = true;
       sessionStorage.setItem('flag', JSON.stringify(this.timeOver));
@@ -69,6 +73,11 @@ export class HeroesPageComponent implements OnInit {
 
   resentQuery(event, item): void {
     this.searchForm.get('inputField').setValue(item);
+    this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
+      .subscribe((responseArray: any) => {
+        this.responseArray = responseArray.results;
+        console.log(this.responseArray);
+      });
   }
 
 
@@ -80,5 +89,19 @@ export class HeroesPageComponent implements OnInit {
         this.responseArray = responseArray.results;
         console.log(this.responseArray);
       });
+  }
+
+  canDeactivate(): boolean | Observable<boolean> {
+    if (localStorage.getItem('userHero')) {
+      const hero = [JSON.parse(localStorage.getItem('userHero'))];
+      hero[0].isSelected = false; // 1
+      if (localStorage.getItem('selectedHeroes')) {
+        this.selectedHeroes = [...JSON.parse(localStorage.getItem('selectedHeroes')), ...hero];
+      } else {
+        this.selectedHeroes = [...hero];
+      }
+      localStorage.setItem('selectedHeroes', JSON.stringify(this.selectedHeroes));
+    }
+    return true;
   }
 }

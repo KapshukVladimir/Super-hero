@@ -1,5 +1,5 @@
-<form class="form-control" [formGroup]="searchForm" (ngSubmit)="submit($event)">
-  <div class="group">
+<form class="form" [formGroup]="searchForm" (ngSubmit)="submit($event)">
+  <div class="my-group">
     <app-alphabetical-select (newLetter)="changeInput($event)"></app-alphabetical-select>
     <input class="input-field" type="text" name="name" formControlName="inputField">
   </div>
@@ -19,4 +19,4 @@
 
 
 
-<app-heroes-list [responseArray]="responseArray"></app-heroes-list>
+<app-heroes-list *ngIf="responseArray.length" [string]="heroPage" [responseArray]="responseArray"></app-heroes-list>

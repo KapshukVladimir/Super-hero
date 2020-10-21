@@ -18,6 +18,8 @@ import { AlphabeticalSelectComponent } from './alphabetical-select/alphabetical-
 import { AlphabeticalItemComponent } from './alphabetical-select/alphabetical-item/alphabetical-item.component';
 import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ExitGuardComponent } from './heroes-page/exit-guard/exit-guard.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -41,9 +43,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [ExitGuardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
