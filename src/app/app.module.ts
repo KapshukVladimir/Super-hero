@@ -22,6 +22,9 @@ import { ExitGuardComponent } from './heroes-page/exit-guard/exit-guard.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableModule } from '@angular/material/table';
 import { SortPipe } from './shared/pipes/sort.pipe';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { CardItemComponent } from './user-info-page/card-item/card-item.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { SortPipe } from './shared/pipes/sort.pipe';
     AlphabeticalSelectComponent,
     AlphabeticalItemComponent,
     UserInfoPageComponent,
-    SortPipe
+    SortPipe,
+    CardItemComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { SortPipe } from './shared/pipes/sort.pipe';
     HttpClientModule,
     MatTabsModule,
     NgbModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [ExitGuardComponent],
   bootstrap: [AppComponent]
