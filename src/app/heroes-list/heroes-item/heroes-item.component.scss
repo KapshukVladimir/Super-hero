@@ -1,4 +1,6 @@
 .hero-card {
+  margin-top: 2rem;
+  width: 800px;
   background: mediumpurple;
   border-radius: 4px;
   padding: 1rem;
@@ -15,6 +17,13 @@
   & .left {
     width: 48%;
     margin-right: 2%;
+    & .title {
+      & .hero-name {
+        position: relative;
+        z-index: 20;
+        cursor: pointer;
+      }
+    }
     & .image {
       width: 100%;
       img {
@@ -39,6 +48,8 @@
 
     }
     & .btn-choose {
+      position: relative;
+      z-index: 20;
       font-weight: bold;
       background: indigo;
       color: #fff;

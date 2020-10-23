@@ -25,6 +25,8 @@ import { SortPipe } from './shared/pipes/sort.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CardItemComponent } from './user-info-page/card-item/card-item.component';
+import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { CardItemComponent } from './user-info-page/card-item/card-item.componen
     AlphabeticalItemComponent,
     UserInfoPageComponent,
     SortPipe,
-    CardItemComponent
+    CardItemComponent,
+    HeroInfoPageComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { CardItemComponent } from './user-info-page/card-item/card-item.componen
     NgbModule,
     MatTableModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [ExitGuardComponent],
   bootstrap: [AppComponent]

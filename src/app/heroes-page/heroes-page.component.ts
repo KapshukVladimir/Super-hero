@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ComponentCanDeactivate } from './exit-guard/exit-guard.component';
 
-export interface ResponseArray {
+export interface Hero {
   id: string;
   name: string;
   powerstats: object;
@@ -13,7 +13,10 @@ export interface ResponseArray {
   appearance: object;
   work: object;
   connections: object;
-  image: object;
+  image: {
+    url: string;
+  };
+  isSelected: boolean;
 }
 
 @Component({

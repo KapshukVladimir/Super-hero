@@ -26,9 +26,11 @@ export class UserInfoPageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+
   }
 
   ngOnInit(): void {
+
     this.selectedHeroes = [...JSON.parse(localStorage.getItem('selectedHeroes'))];
     this.dataSource = [
       {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},

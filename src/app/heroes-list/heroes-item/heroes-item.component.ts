@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Hero } from '../../heroes-page/heroes-page.component';
 
 @Component({
   selector: 'app-heroes-item',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./heroes-item.component.scss']
 })
 export class HeroesItemComponent implements OnInit {
-  @Input() hero;
+  @Input() hero: Hero;
   @Input() string;
   @Output() newArray = new EventEmitter<object[]>(); // 3
   isDisabled = false;
