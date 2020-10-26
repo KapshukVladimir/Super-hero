@@ -21,7 +21,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ExitGuardComponent } from './heroes-page/exit-guard/exit-guard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableModule } from '@angular/material/table';
-import { SortPipe } from './shared/pipes/sort.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CardItemComponent } from './user-info-page/card-item/card-item.component';
@@ -46,7 +45,6 @@ import { AuthGuard } from './login-page/auth.guard';
     AlphabeticalSelectComponent,
     AlphabeticalItemComponent,
     UserInfoPageComponent,
-    SortPipe,
     CardItemComponent,
     HeroInfoPageComponent,
     BattlePageComponent,

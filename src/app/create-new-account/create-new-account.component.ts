@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../shared/interfaces';
 
 @Component({
   selector: 'app-create-new-account',
@@ -9,12 +10,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CreateNewAccountComponent implements OnInit {
   form: FormGroup;
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     this.form = new FormGroup({
-        username: new FormControl('',[
+        username: new FormControl('', [
           Validators.required,
           Validators.pattern('^[(\w\d)(-|(\s)|A-Z)(\w\d)]{8,}$')
         ]),
@@ -33,19 +31,21 @@ export class CreateNewAccountComponent implements OnInit {
 
   createNewAccount(): void {
     if (this.form.valid) {
-      const user = {
+      const user: User = {
         id: Date.now(),
         username: this.form.value.username,
         email: this.form.value.email,
         password: this.form.value.password,
       };
-      console.log(user);
+
       if (localStorage.getItem('users')) {
         const users = [...JSON.parse(localStorage.getItem('users'))];
+
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
       } else {
-        const users = [];
+        const users: object[] = [];
+
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
       }

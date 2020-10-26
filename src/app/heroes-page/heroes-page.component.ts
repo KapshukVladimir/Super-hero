@@ -14,10 +14,9 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./heroes-page.component.scss']
 })
 export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
-  timeOver: boolean;
   searchForm: FormGroup;
-  recentSearches = [];
-  responseArray = [];
+  recentSearches: object[] = [];
+  responseArray: object[] = [];
   selectedHeroes: object[] = [];
   heroPage = 'heroPage';
 
@@ -46,30 +45,26 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
       .subscribe((responseArray: ResponseArray) => {
         this.responseArray = responseArray.results;
-        console.log(this.responseArray);
       });
 
     this.searchForm.reset();
   }
 
-  resentQuery(event, item): void {
+  resentQuery(event: object[], item: object): void {
     this.searchForm.get('inputField').setValue(item);
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
       .subscribe((responseArray: ResponseArray) => {
         this.responseArray = responseArray.results;
-        console.log(this.responseArray);
       });
   }
 
 
-  changeInput(event): void {
+  changeInput(event: object[]): void {
     this.searchForm.get('inputField').setValue(event);
 
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
       .subscribe((responseArray: ResponseArray) => {
-        console.log(responseArray);
         this.responseArray = responseArray.results;
-        console.log(this.responseArray);
       });
   }
 
@@ -77,6 +72,7 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
     if (localStorage.getItem('userHero')) {
       const hero = [JSON.parse(localStorage.getItem('userHero'))];
       hero[0].isSelected = false; // 1
+
       if (localStorage.getItem('selectedHeroes')) {
         this.selectedHeroes = [...JSON.parse(localStorage.getItem('selectedHeroes')), ...hero];
       } else {

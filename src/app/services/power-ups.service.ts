@@ -55,7 +55,6 @@ export class PowerUpsService {
       imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/71jI09v6zjL._AC_UL1500_.jpg'
     }
   ];
-  constructor() { }
 
   getPowerUps(): PowerUps[] {
     return this.powerUps;

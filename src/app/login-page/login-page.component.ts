@@ -52,7 +52,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   signIn(): void {
-    const token = {
+    const token: object = {
       idToken: this.createToken(),
       expire: Date.now()
     };

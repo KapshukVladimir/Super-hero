@@ -28,10 +28,8 @@ export class HeroInfoPageComponent implements OnInit {
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/${this.id}`)
       .subscribe((hero: Hero) => {
         this.hero = hero;
-        console.log(this.hero);
       });
     sessionStorage.setItem('flag', JSON.stringify(true));
     this.authService.checkLoginToken();
   }
-
 }

@@ -8,17 +8,14 @@ import { Hero } from '../../shared/interfaces';
 })
 export class HeroesItemComponent implements OnInit {
   @Input() hero: Hero;
-  @Input() string;
+  @Input() string: string;
   @Input() isButtonShow = true;
   @Output() newArray = new EventEmitter<object[]>(); // 3
   isDisabled = false;
-  selectedHeroes = [];
+  selectedHeroes: object[] = [];
   isHeroPage: boolean;
   btnText = 'Choose hero';
   objectKeys = Object.keys;
-
-  constructor() {
-  }
 
   ngOnInit(): void {
     this.btnText = this.hero.isSelected ? 'Remove' : 'Choose';
@@ -32,7 +29,6 @@ export class HeroesItemComponent implements OnInit {
       default:
         break;
     }
-
   }
 
   chooseHero(): void {
@@ -46,6 +42,7 @@ export class HeroesItemComponent implements OnInit {
     this.hero.isSelected = !this.hero.isSelected;
     this.btnText = this.hero.isSelected ? 'Remove Hero' : 'Choose Hero';
     arr = arr.map(el => {
+
       if (el.id === this.hero.id) {
         el = this.hero;
       } else {
@@ -53,6 +50,7 @@ export class HeroesItemComponent implements OnInit {
       }
       return el;
     });
+
     if (!this.hero.isSelected) {
       localStorage.removeItem('selectedHero');
     } else {

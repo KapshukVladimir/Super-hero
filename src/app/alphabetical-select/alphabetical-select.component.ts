@@ -6,11 +6,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./alphabetical-select.component.scss']
 })
 export class AlphabeticalSelectComponent implements OnInit {
-  alphabetical = [];
+  alphabetical: string[] = [];
   showAlphabetical = false;
   item = 'a';
   @Output() newLetter = new EventEmitter<string>();
-  constructor() { }
 
   ngOnInit(): void {
     this.alphabetical = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];

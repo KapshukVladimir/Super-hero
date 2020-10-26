@@ -6,7 +6,12 @@ export interface BattleResult {
   heroId: string;
   opponentId: string;
 }
-
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+}
 export interface Hero {
   id: string;
   name: string;

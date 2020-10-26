@@ -6,9 +6,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./alphabetical-item.component.scss']
 })
 export class AlphabeticalItemComponent implements OnInit {
-  @Input() item;
+  @Input() item: string;
   @Output() newLetter = new EventEmitter<string>();
-  constructor() { }
 
   ngOnInit(): void {
   }

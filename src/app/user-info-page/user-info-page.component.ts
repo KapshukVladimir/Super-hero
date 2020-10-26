@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { PowerUpsService } from '../services/power-ups.service';
@@ -16,7 +16,7 @@ export class UserInfoPageComponent implements OnInit, AfterViewInit {
   isSelected = false;
   btnText = 'Choose';
   displayedColumns: string[] = ['heroName', 'opponentName', 'battleTime', 'battleResult'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<object>;
   dataArray: BattleResult[];
   powerUps: PowerUps[];
   @ViewChild(MatSort) sort: MatSort;
