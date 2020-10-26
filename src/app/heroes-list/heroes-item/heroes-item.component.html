@@ -9,12 +9,17 @@
   </div>
 
   <div class="right">
+
     <div class="powerstats" *ngFor="let key of objectKeys(hero.powerstats)">
       <div>{{ key | titlecase }} <strong>{{ hero.powerstats[key] }}</strong></div>
     </div>
-    <button class="btn-choose" *ngIf="isHeroPage else anotherBtn" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
-    <ng-template #anotherBtn>
-      <button class="btn-choose" [class.active]="hero.isSelected" (click)="selectedHero()">{{ btnText }}</button>
-    </ng-template>
+
+    <ng-container *ngIf="isButtonShow">
+      <button class="btn-choose" *ngIf="isHeroPage else anotherBtn" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
+      <ng-template #anotherBtn>
+        <button class="btn-choose" [class.active]="hero.isSelected" (click)="selectedHero()">{{ btnText }}</button>
+      </ng-template>
+    </ng-container>
+
   </div>
 </li>

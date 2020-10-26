@@ -4,20 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ComponentCanDeactivate } from './exit-guard/exit-guard.component';
+import { ResponseArray } from '../shared/interfaces';
+import { AuthService } from '../services/auth.service';
 
-export interface Hero {
-  id: string;
-  name: string;
-  powerstats: object;
-  biography: object;
-  appearance: object;
-  work: object;
-  connections: object;
-  image: {
-    url: string;
-  };
-  isSelected: boolean;
-}
 
 @Component({
   selector: 'app-heroes-page',
@@ -34,7 +23,8 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
     this.searchForm = new FormGroup({
       inputField: new FormControl('', [
@@ -46,27 +36,15 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
 
   ngOnInit(): void {
     localStorage.removeItem('userHero');
-    if (this.isAliveToken()) {
-      this.timeOver = true;
-      sessionStorage.setItem('flag', JSON.stringify(this.timeOver));
-      this.router.navigate(['/login']);
-    }
-  }
-
-  isAliveToken(): boolean {
-    const currentToken = JSON.parse(sessionStorage.getItem('token'));
-    const dateNow = Date.now();
-    const loginTime = dateNow - currentToken.expire;
-    if (loginTime > 5000000000000000000000) {
-      return true;
-    }
+    sessionStorage.setItem('flag', JSON.stringify(true));
+    this.authService.checkLoginToken();
   }
 
   submit(event): void {
     event.preventDefault();
     this.recentSearches = [...this.recentSearches, this.searchForm.value.inputField];
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
-      .subscribe((responseArray: any) => {
+      .subscribe((responseArray: ResponseArray) => {
         this.responseArray = responseArray.results;
         console.log(this.responseArray);
       });
@@ -77,7 +55,7 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
   resentQuery(event, item): void {
     this.searchForm.get('inputField').setValue(item);
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
-      .subscribe((responseArray: any) => {
+      .subscribe((responseArray: ResponseArray) => {
         this.responseArray = responseArray.results;
         console.log(this.responseArray);
       });
@@ -88,7 +66,8 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
     this.searchForm.get('inputField').setValue(event);
 
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
-      .subscribe((responseArray: any) => {
+      .subscribe((responseArray: ResponseArray) => {
+        console.log(responseArray);
         this.responseArray = responseArray.results;
         console.log(this.responseArray);
       });

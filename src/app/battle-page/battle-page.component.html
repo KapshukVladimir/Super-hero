@@ -1,0 +1,55 @@
+<div class="battle-ground row">
+
+  <div class="hero-card col-4">
+    <app-heroes-item [isButtonShow]="isButtonShow" [hero]="hero"></app-heroes-item>
+  </div>
+
+  <div class="controls-block col-4 d-flex flex-column" [ngClass]="clicked ? null : 'mr-auto'">
+    <button class="btn-primary"  *ngIf="!clicked else fightBlock" (click)="findOpponent()">Find opponent</button>
+    <ng-template #fightBlock>
+      <div class="d-flex flex-column align-items-center">
+        <div class="p-1">
+          <button mat-raised-button color="primary">{{ hero.name }}</button>
+        </div>
+        <div class="p-1">
+          <button mat-raised-button color="warn" (click)="startBattle()">Start</button>
+        </div>
+        <div class="p-1">
+          <button mat-raised-button color="primary" *ngIf="opponent">{{ opponent.name }}</button>
+        </div>
+      </div>
+      <div class="power-ups pt-5">
+        <mat-card>
+          <mat-card class="power-card d-flex justify-content-between align-items-center mb-2"
+                    *ngFor="let power of powerUps"
+                    (click)="!power.isSelected ? choosePower($event, power) : null"
+                    [class.active]="power.isSelected"
+                    [ngStyle]="power.isSelected ? {'opacity': '.5'} : {'opacity': '1'}">
+
+
+            <div [ngStyle]="{'width': '50px', 'height': '50px'}">
+              <img [src]="power.imgUrl" class="w-100 h-100" [ngStyle]="{'objectFit': 'contain'}" alt="power">
+            </div>
+            <div>
+              <h4>{{power.type}}: +{{power.amount}}</h4>
+            </div>
+            <div>
+              <h4>Uses left: {{power.count}}</h4>
+            </div>
+          </mat-card>
+        </mat-card>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="opponent-card col-4" *ngIf="clicked">
+    <app-heroes-item *ngIf="opponent; else loader" [isButtonShow]="isButtonShow" [hero]="opponent"></app-heroes-item>
+  </div>
+  <ng-template #loader>
+    <mat-progress-spinner class="m-auto" mode="indeterminate"></mat-progress-spinner>
+  </ng-template>
+</div>
+
+<app-modal *ngIf="showModal" [(opened)]="showModal">
+  <h3>{{ win }}</h3>
+</app-modal>

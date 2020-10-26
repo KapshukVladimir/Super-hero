@@ -1,0 +1,22 @@
+.battle-ground {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  & .hero-card {
+
+  }
+  & .controls-block {
+    margin-top: 200px;
+    & .power-card {
+      cursor: pointer;
+    }
+    & div button {
+      width: 150px;
+      padding: 0 10px;
+    }
+  }
+}
+.active {
+  background: dodgerblue;
+}

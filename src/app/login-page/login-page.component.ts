@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,10 @@ export class LoginPageComponent implements OnInit {
   entry = true;
   showModal = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.form = new FormGroup({
         email: new FormControl('', [
           Validators.required,
@@ -30,16 +34,19 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     if (sessionStorage.getItem('flag')) {
       this.showModal = true;
+      this.authService.changeStateFlag();
       sessionStorage.clear();
     }
   }
+
 
   createToken(): string {
     let text = '';
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < 15; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+      text += possible.charAt(Math.floor(
+        Math.random() * possible.length));
     }
     return text;
   }
@@ -54,6 +61,7 @@ export class LoginPageComponent implements OnInit {
     users.forEach(el => {
       if (el.email === this.form.value.email && el.password === this.form.value.password) {
         this.entry = true;
+        this.authService.changeStateFlag();
         this.router.navigate(['/heroes-page']);
         this.form.reset();
       } else {

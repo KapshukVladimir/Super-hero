@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Hero } from '../../heroes-page/heroes-page.component';
+import { Hero } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-heroes-item',
@@ -9,12 +9,14 @@ import { Hero } from '../../heroes-page/heroes-page.component';
 export class HeroesItemComponent implements OnInit {
   @Input() hero: Hero;
   @Input() string;
+  @Input() isButtonShow = true;
   @Output() newArray = new EventEmitter<object[]>(); // 3
   isDisabled = false;
   selectedHeroes = [];
   isHeroPage: boolean;
   btnText = 'Choose hero';
   objectKeys = Object.keys;
+
   constructor() {
   }
 
@@ -27,8 +29,10 @@ export class HeroesItemComponent implements OnInit {
       case ('userPage'):
         this.isHeroPage = false;
         break;
-      default: break;
+      default:
+        break;
     }
+
   }
 
   chooseHero(): void {
@@ -49,9 +53,12 @@ export class HeroesItemComponent implements OnInit {
       }
       return el;
     });
+    if (!this.hero.isSelected) {
+      localStorage.removeItem('selectedHero');
+    } else {
+      localStorage.setItem('selectedHero', JSON.stringify(this.hero));
+    }
     localStorage.setItem('selectedHeroes', JSON.stringify(arr));
     this.newArray.emit(arr); // 4
-    // this.isActive = !this.isActive;
-    // this.btnText = this.isActive ? 'Remove hero' : 'Choose hero';
   }
 }

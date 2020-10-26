@@ -27,6 +27,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardItemComponent } from './user-info-page/card-item/card-item.component';
 import { HeroInfoPageComponent } from './hero-info-page/hero-info-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BattlePageComponent } from './battle-page/battle-page.component';
+import { AccessBattleComponent } from './battle-page/access-battle/access-battle.component';
+import { MatSortModule } from '@angular/material/sort';
+import { AuthGuard } from './login-page/auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     UserInfoPageComponent,
     SortPipe,
     CardItemComponent,
-    HeroInfoPageComponent
+    HeroInfoPageComponent,
+    BattlePageComponent,
+    AccessBattleComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +64,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
-  providers: [ExitGuardComponent],
+  providers: [AuthGuard, ExitGuardComponent, AccessBattleComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
