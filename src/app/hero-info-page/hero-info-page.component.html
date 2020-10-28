@@ -14,13 +14,13 @@
 
       <div>
         <h2>Power stats</h2>
-        <div class="powerstats" *ngFor="let key of objectKeys(hero.powerstats)">
-          <div>{{ key | titlecase }}: <strong>{{ hero.powerstats[key] }}</strong></div>
+        <div class="powerstats" *ngFor="let hero of hero.powerstats | keyvalue">
+          <div>{{ hero.key.toString() | titlecase }}: <strong>{{ hero.value }}</strong></div>
         </div>
       </div>
       <hr>
-      <div class="more-info" *ngFor="let key of objectKeys(hero.biography)">
-        <div>{{ key | titlecase }}: <strong>{{ hero.biography[key] }}</strong></div>
+      <div class="more-info" *ngFor="let key of hero.biography | keyvalue">
+        <div>{{ key.key.toString() | titlecase }}: <strong>{{ key.value }}</strong></div>
       </div>
     </div>
 

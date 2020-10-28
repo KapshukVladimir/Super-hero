@@ -50,7 +50,7 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
     this.searchForm.reset();
   }
 
-  resentQuery(event: object[], item: object): void {
+  resentQuery(event: object, item: object): void {
     this.searchForm.get('inputField').setValue(item);
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
       .subscribe((responseArray: ResponseArray) => {
@@ -59,7 +59,7 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
   }
 
 
-  changeInput(event: object[]): void {
+  changeInput(event: string): void {
     this.searchForm.get('inputField').setValue(event);
 
     this.http.get(`https://www.superheroapi.com/api.php/3427464907330752/search/${this.searchForm.value.inputField}`)
@@ -71,7 +71,7 @@ export class HeroesPageComponent implements OnInit, ComponentCanDeactivate {
   canDeactivate(): boolean | Observable<boolean> {
     if (localStorage.getItem('userHero')) {
       const hero = [JSON.parse(localStorage.getItem('userHero'))];
-      hero[0].isSelected = false; // 1
+      hero[0].isSelected = false;
 
       if (localStorage.getItem('selectedHeroes')) {
         this.selectedHeroes = [...JSON.parse(localStorage.getItem('selectedHeroes')), ...hero];

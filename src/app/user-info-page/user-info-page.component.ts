@@ -45,7 +45,7 @@ export class UserInfoPageComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  changeArray(event): void { // 7
+  changeArray(event): void {
     this.selectedHeroes = event;
   }
 }

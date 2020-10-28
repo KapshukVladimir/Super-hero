@@ -10,12 +10,11 @@ export class HeroesItemComponent implements OnInit {
   @Input() hero: Hero;
   @Input() string: string;
   @Input() isButtonShow = true;
-  @Output() newArray = new EventEmitter<object[]>(); // 3
+  @Output() newArray = new EventEmitter<object[]>();
   isDisabled = false;
   selectedHeroes: object[] = [];
   isHeroPage: boolean;
   btnText = 'Choose hero';
-  objectKeys = Object.keys;
 
   ngOnInit(): void {
     this.btnText = this.hero.isSelected ? 'Remove' : 'Choose';
@@ -57,6 +56,6 @@ export class HeroesItemComponent implements OnInit {
       localStorage.setItem('selectedHero', JSON.stringify(this.hero));
     }
     localStorage.setItem('selectedHeroes', JSON.stringify(arr));
-    this.newArray.emit(arr); // 4
+    this.newArray.emit(arr);
   }
 }

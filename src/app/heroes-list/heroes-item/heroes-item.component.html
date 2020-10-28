@@ -10,12 +10,16 @@
 
   <div class="right">
 
-    <div class="powerstats" *ngFor="let key of objectKeys(hero.powerstats)">
-      <div>{{ key | titlecase }} <strong>{{ hero.powerstats[key] }}</strong></div>
+    <div class="powerstats" *ngFor="let hero of hero.powerstats | keyvalue">
+      <div>{{ hero.key.toString() | titlecase }} <strong>{{ hero.value }}</strong></div>
     </div>
 
     <ng-container *ngIf="isButtonShow">
-      <button class="btn-choose" *ngIf="isHeroPage else anotherBtn" (click)="chooseHero()" [disabled]="isDisabled">Choose hero</button>
+      <button class="btn-choose"
+              *ngIf="isHeroPage else anotherBtn"
+              [disabled]="isDisabled"
+              (click)="chooseHero()"
+      >Choose hero</button>
       <ng-template #anotherBtn>
         <button class="btn-choose" [class.active]="hero.isSelected" (click)="selectedHero()">{{ btnText }}</button>
       </ng-template>

@@ -18,8 +18,9 @@ export class BattlePageComponent implements OnInit {
   clicked = false;
   isBattle = false;
   win: string;
-  battleResult: object[] = localStorage.getItem('battleResult') ? JSON.parse(localStorage.getItem('battleResult')) : [];
+  battleResult: BattleResult[] = localStorage.getItem('battleResult') ? JSON.parse(localStorage.getItem('battleResult')) : [];
   showModal = false;
+  clickable = false;
 
   constructor(
     private http: HttpClient,
@@ -49,35 +50,20 @@ export class BattlePageComponent implements OnInit {
     return Math.floor((Math.random() * 730) + 1);
   }
 
-  choosePower(event: object, power: PowerUps): void {
+  choosePower({name, count, type, amount}: PowerUps): void {
     this.powerUps = [...this.powerUps].map(el => {
 
-      if (el.name === power.name && power.count > 0) {
+      if (el.name === name && count > 0) {
         el.isSelected = !el.isSelected;
         el.count--;
       }
       return el;
     });
-    this.hero.powerstats[power.type.toLowerCase()] = +this.hero.powerstats[power.type.toLowerCase()]
-      + power.amount;
+    const typeLowerCase = type.toLowerCase();
+    this.hero.powerstats[typeLowerCase] = +this.hero.powerstats[typeLowerCase] + amount;
   }
 
-  startBattle(): void {
-    const heroKeys = Object.keys(this.hero.powerstats);
-    let heroPoints = 0;
-    let opponentPoints = 0;
-    heroKeys.forEach(el => {
-
-      if (+this.hero.powerstats[el] > +this.opponent.powerstats[el] || this.opponent.powerstats[el] === 'null') {
-        ++heroPoints;
-      } else if (+this.hero.powerstats[el] < +this.opponent.powerstats[el] || this.hero.powerstats[el] === 'null') {
-        ++opponentPoints;
-      }
-    });
-
-    this.showModal = !this.showModal;
-    this.win = `Battle end after: 5`;
-
+  private createBattleTimer(heroPoints: number, opponentPoints: number): void {
     const source = interval(1000);
     const subscribe = source.subscribe((val: number) => {
       let counterTimer = 4;
@@ -87,14 +73,41 @@ export class BattlePageComponent implements OnInit {
       if (counterTimer === 0) {
         this.win = heroPoints > opponentPoints ? 'You Win' : heroPoints < opponentPoints ? 'You Lose' : 'Draw';
         subscribe.unsubscribe();
+        this.clickable = !this.clickable;
       }
     });
+    this.isBattle = false;
+  }
+
+  startBattle(): void {
+    const heroPower = this.hero.powerstats;
+    const opponentPower = this.opponent.powerstats;
+
+    const totalHeroPoints = Object.keys(heroPower).reduce((totals, value) => {
+      if (heroPower[value] === 'null') {
+        totals = 0;
+        return totals;
+      }
+      return totals + +heroPower[value];
+    }, 0);
+    const totalOpponentPoints = Object.keys(opponentPower)
+      .reduce((totals, value) => {
+        if (opponentPower[value] === 'null'){
+           totals = 0;
+           return totals;
+        }
+        return totals + +opponentPower[value];
+      }, 0);
+
+    this.showModal = !this.showModal;
+    this.win = `Battle end after: 5`;
+    this.createBattleTimer(+totalHeroPoints, +totalOpponentPoints);
     this.isBattle = true;
 
     if (this.isBattle) {
       localStorage.setItem('powerUps', JSON.stringify(this.powerUps));
     }
-    this.isBattle = false;
+
     localStorage.removeItem('opponent');
     this.powerUps = this.powerUps.map(el => {
       el.isSelected = false;
@@ -102,16 +115,21 @@ export class BattlePageComponent implements OnInit {
     });
     localStorage.setItem('powerUps', JSON.stringify(this.powerUps));
 
-    const result: BattleResult = {
+    const result: BattleResult = this.createBattleResult(+totalHeroPoints, +totalOpponentPoints);
+
+    this.battleResult = [...this.battleResult, result];
+    localStorage.setItem('battleResult', JSON.stringify(this.battleResult));
+  }
+
+  private createBattleResult(heroCount: number, opponentCount: number): BattleResult {
+    return {
       heroName: this.hero.name,
       opponentName: this.opponent.name,
       battleTime: new Date(),
-      battleResult: heroPoints > opponentPoints ? 'Win' : heroPoints < opponentPoints ? 'Lose' : 'Draw',
+      battleResult: heroCount > opponentCount ? 'Win' : heroCount < opponentCount ? 'Lose' : 'Draw',
       heroId: this.hero.id,
       opponentId: this.opponent.id,
     };
-    this.battleResult.push(result);
-    localStorage.setItem('battleResult', JSON.stringify(this.battleResult));
   }
 
   findOpponent(): void {
@@ -122,6 +140,4 @@ export class BattlePageComponent implements OnInit {
         this.opponent = JSON.parse(localStorage.getItem('opponent'));
       });
   }
-
-
 }

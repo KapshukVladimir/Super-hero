@@ -35,23 +35,22 @@ export class LoginPageComponent implements OnInit {
     if (sessionStorage.getItem('flag')) {
       this.showModal = true;
       this.authService.changeStateFlag();
-      sessionStorage.clear();
+      sessionStorage.removeItem('token');
     }
   }
 
-
   createToken(): string {
     let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const token = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < 15; i++) {
-      text += possible.charAt(Math.floor(
-        Math.random() * possible.length));
+      text += token.charAt(Math.floor(
+        Math.random() * token.length));
     }
     return text;
   }
 
-  signIn(): void {
+  signIn({email, password}): void {
     const token: object = {
       idToken: this.createToken(),
       expire: Date.now()
@@ -59,7 +58,7 @@ export class LoginPageComponent implements OnInit {
     sessionStorage.setItem('token', JSON.stringify(token));
     const users = JSON.parse(localStorage.getItem('users'));
     users.forEach(el => {
-      if (el.email === this.form.value.email && el.password === this.form.value.password) {
+      if (el.email === email && el.password === password) {
         this.entry = true;
         this.authService.changeStateFlag();
         this.router.navigate(['/heroes-page']);

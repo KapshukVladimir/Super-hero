@@ -1,25 +1,23 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { StaticArrayAlphabetical} from './staticArrayAlphabetical';
 
 @Component({
   selector: 'app-alphabetical-select',
   templateUrl: './alphabetical-select.component.html',
   styleUrls: ['./alphabetical-select.component.scss']
 })
-export class AlphabeticalSelectComponent implements OnInit {
+export class AlphabeticalSelectComponent {
+  @Output() newLetter: EventEmitter<string> = new EventEmitter<string>();
   alphabetical: string[] = [];
   showAlphabetical = false;
   item = 'a';
-  @Output() newLetter = new EventEmitter<string>();
 
-  ngOnInit(): void {
-    this.alphabetical = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  }
-
-  chooseLetter(): void {
+  toggleLetter(): void {
+    this.alphabetical = StaticArrayAlphabetical.getAlphabet();
     this.showAlphabetical = !this.showAlphabetical;
   }
 
-  changeLetter(event): void {
+  changeLetter(event: string): void {
     this.item = event;
     this.showAlphabetical = false;
     this.newLetter.emit(this.item);

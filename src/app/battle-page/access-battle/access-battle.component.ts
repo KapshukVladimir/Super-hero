@@ -8,17 +8,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./access-battle.component.scss']
 })
 export class AccessBattleComponent implements CanActivate {
-  canGo = false;
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    if (localStorage.getItem('selectedHero')) {
-      this.canGo = true;
-
-      if (this.canGo) {
-        this.canGo = false;
-        return true;
-      }
-    }
+    return !!localStorage.getItem('selectedHero');
   }
-
 }

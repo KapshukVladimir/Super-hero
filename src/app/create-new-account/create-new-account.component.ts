@@ -29,24 +29,19 @@ export class CreateNewAccountComponent implements OnInit {
     );
   }
 
-  createNewAccount(): void {
+  createNewAccount({username, email, password}): void {
     if (this.form.valid) {
       const user: User = {
         id: Date.now(),
-        username: this.form.value.username,
-        email: this.form.value.email,
-        password: this.form.value.password,
+        username,
+        email,
+        password,
       };
-
       if (localStorage.getItem('users')) {
-        const users = [...JSON.parse(localStorage.getItem('users'))];
-
-        users.push(user);
+        const users = [...JSON.parse(localStorage.getItem('users')), user];
         localStorage.setItem('users', JSON.stringify(users));
       } else {
-        const users: object[] = [];
-
-        users.push(user);
+        const users: object[] = [user];
         localStorage.setItem('users', JSON.stringify(users));
       }
     }

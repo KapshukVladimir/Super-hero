@@ -14,8 +14,9 @@ export class AuthService {
   checkLoginToken(): void {
     const personToken = JSON.parse(sessionStorage.getItem('token'));
     const currentToken = Date.now();
+    const ONE_HOUR_IN_MILLISECONDS = 3600000;
 
-    if (currentToken - personToken.expire >= 1000000) {
+    if (currentToken - personToken.expire >= ONE_HOUR_IN_MILLISECONDS) {
       this.router.navigate(['/login']);
     }
   }

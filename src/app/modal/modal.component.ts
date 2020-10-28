@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalComponent {
   @Input() opened = false;
+  @Input() clickable;
   @Output() openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   closeModal(): void {

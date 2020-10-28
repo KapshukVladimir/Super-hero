@@ -13,7 +13,6 @@ import { AuthService } from '../services/auth.service';
 export class HeroInfoPageComponent implements OnInit {
   hero: Hero;
   id: number;
-  objectKeys = Object.keys;
   private subscription: Subscription;
 
   constructor(
