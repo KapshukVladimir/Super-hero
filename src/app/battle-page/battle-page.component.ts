@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BattleResult, Hero, PowerUps } from '../shared/interfaces';
+import { BattleResult, Hero, PowerUps, ResultStatsSum } from '../shared/interfaces';
 import { AuthService } from '../services/auth.service';
 import { interval } from 'rxjs';
 
@@ -63,7 +63,7 @@ export class BattlePageComponent implements OnInit {
     this.hero.powerstats[typeLowerCase] = +this.hero.powerstats[typeLowerCase] + amount;
   }
 
-  private createBattleTimer(heroPoints: number, opponentPoints: number): void {
+  private createBattleTimer(stats): void {
     const source = interval(1000);
     const subscribe = source.subscribe((val: number) => {
       let counterTimer = 4;
@@ -71,7 +71,9 @@ export class BattlePageComponent implements OnInit {
       this.win = `Battle end after: ${counterTimer}`;
 
       if (counterTimer === 0) {
-        this.win = heroPoints > opponentPoints ? 'You Win' : heroPoints < opponentPoints ? 'You Lose' : 'Draw';
+        this.win = stats.heroStatsSum > stats.opponentStatsSum ?
+          'You Win' : stats.heroStatsSum < stats.opponentStatsSum ?
+            'You Lose' : 'Draw';
         subscribe.unsubscribe();
         this.clickable = !this.clickable;
       }
@@ -79,29 +81,21 @@ export class BattlePageComponent implements OnInit {
     this.isBattle = false;
   }
 
-  startBattle(): void {
+   startBattle(): void {
     const heroPower = this.hero.powerstats;
     const opponentPower = this.opponent.powerstats;
 
-    const totalHeroPoints = Object.keys(heroPower).reduce((totals, value) => {
-      if (heroPower[value] === 'null') {
-        totals = 0;
-        return totals;
+    const resultNumber = Object.keys(heroPower).reduce((acc: ResultStatsSum, current) => {
+      if (heroPower[current] !== 'null' && opponentPower[current] !== 'null') {
+        acc.heroStatsSum += +heroPower[current];
+        acc.opponentStatsSum += +opponentPower[current];
+        return acc;
       }
-      return totals + +heroPower[value];
-    }, 0);
-    const totalOpponentPoints = Object.keys(opponentPower)
-      .reduce((totals, value) => {
-        if (opponentPower[value] === 'null'){
-           totals = 0;
-           return totals;
-        }
-        return totals + +opponentPower[value];
-      }, 0);
+    }, {heroStatsSum: 0, opponentStatsSum: 0 });
 
     this.showModal = !this.showModal;
     this.win = `Battle end after: 5`;
-    this.createBattleTimer(+totalHeroPoints, +totalOpponentPoints);
+    this.createBattleTimer(resultNumber);
     this.isBattle = true;
 
     if (this.isBattle) {
@@ -115,18 +109,18 @@ export class BattlePageComponent implements OnInit {
     });
     localStorage.setItem('powerUps', JSON.stringify(this.powerUps));
 
-    const result: BattleResult = this.createBattleResult(+totalHeroPoints, +totalOpponentPoints);
+    const result: BattleResult = this.createBattleResult(resultNumber);
 
     this.battleResult = [...this.battleResult, result];
     localStorage.setItem('battleResult', JSON.stringify(this.battleResult));
   }
 
-  private createBattleResult(heroCount: number, opponentCount: number): BattleResult {
+  private createBattleResult(stats: ResultStatsSum): BattleResult {
     return {
       heroName: this.hero.name,
       opponentName: this.opponent.name,
       battleTime: new Date(),
-      battleResult: heroCount > opponentCount ? 'Win' : heroCount < opponentCount ? 'Lose' : 'Draw',
+      battleResult: stats.heroStatsSum > stats.opponentStatsSum ? 'Win' : stats.heroStatsSum < stats.opponentStatsSum ? 'Lose' : 'Draw',
       heroId: this.hero.id,
       opponentId: this.opponent.id,
     };

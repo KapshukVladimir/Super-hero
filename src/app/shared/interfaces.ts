@@ -47,3 +47,8 @@ export interface ResponseArray {
   ['results-for']: string;
   results: Hero[];
 }
+
+export interface ResultStatsSum {
+  heroStatsSum: number;
+  opponentStatsSum: number;
+}
