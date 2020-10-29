@@ -10,7 +10,7 @@ export class HeroesItemComponent implements OnInit {
   @Input() hero: Hero;
   @Input() string: string;
   @Input() isButtonShow = true;
-  @Output() newArray = new EventEmitter<object[]>();
+  @Output() newArray: EventEmitter<object[]> = new EventEmitter<object[]>();
   isDisabled = false;
   selectedHeroes: object[] = [];
   isHeroPage: boolean;
