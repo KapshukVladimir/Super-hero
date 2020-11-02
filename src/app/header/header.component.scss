@@ -1,0 +1,27 @@
+.header {
+  background: orange;
+  color: #000;
+  font-family: "Roboto Regular", sans-serif;
+  padding: 1rem 5rem;
+
+  & .logo {
+    font-size: 2rem;
+  }
+  & .navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+
+    li {
+      padding: 0 1rem;
+      a {
+        font-size: 1rem;
+        text-decoration: none;
+        color: #000;
+      }
+    }
+
+  }
+
+}

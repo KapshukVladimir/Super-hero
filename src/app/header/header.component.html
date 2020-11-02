@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="wrapper d-flex justify-content-between">
+    <div class="logo">
+      <a [routerLink]="['/heroes-page']">Super Hero</a>
+    </div>
+    <div class="battle">
+      <button mat-raised-button color="warn" [routerLink]="['/battle-page']">Battle</button>
+    </div>
+    <ul class="navigation">
+      <li>
+        <a [routerLink]="['/user-info']">User info</a>
+      </li>
+      <li>
+        <a href="">Avatar</a>
+      </li>
+    </ul>
+  </div>
+</header>

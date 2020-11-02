@@ -1,0 +1,73 @@
+.hero-card {
+  margin-top: 2rem;
+  width: 100%;
+  background: mediumpurple;
+  border-radius: 4px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0 12px 32px 0 rgba(0,0,0,0.6);
+  }
+
+  & .left {
+    width: 48%;
+    margin-right: 2%;
+    & .title {
+      & .hero-name {
+        position: relative;
+        z-index: 20;
+        cursor: pointer;
+      }
+    }
+    & .image {
+      width: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  & .right {
+    width: 48%;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.6rem 0 .3rem;
+
+    & .powerstats div {
+      color: goldenrod;
+      font-weight: bold;
+      padding: .4rem 0;
+
+    }
+    & .btn-choose {
+      position: relative;
+      z-index: 20;
+      font-weight: bold;
+      background: indigo;
+      color: #fff;
+      border: 1px solid indigo;
+      border-radius: 5px;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background .2s ease-in;
+      &:hover {
+        background: purple;
+      }
+      &:disabled {
+        background: #cacaca;
+      }
+      &.active {
+        background: orange;
+      }
+    }
+  }
+}

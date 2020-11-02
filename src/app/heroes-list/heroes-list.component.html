@@ -1,0 +1,7 @@
+<ul class="users-list">
+  <small *ngIf="responseArray.length">Results: {{ responseArray.length}}</small>
+  <app-heroes-item *ngFor="let hero of responseArray"
+                   [hero]="hero"
+                   [string]="string">
+  </app-heroes-item>
+</ul>

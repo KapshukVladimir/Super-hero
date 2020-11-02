@@ -1,0 +1,25 @@
+<div class="container">
+  <form class="form" [formGroup]="searchForm" (ngSubmit)="submit($event)">
+    <div class="my-group">
+      <app-alphabetical-select (newLetter)="changeInput($event)"></app-alphabetical-select>
+      <input class="input-field" type="text" name="name" formControlName="inputField">
+    </div>
+    <div class="validation" *ngIf="!searchForm.invalid">
+      <small>
+        Допустимы только буквы
+      </small>
+    </div>
+
+  </form>
+
+  <div class="recent-searches">
+    <div class="recent-item" *ngFor="let item of recentSearches" (click)="resentQuery($event, item)">
+      {{ item }},
+    </div>
+  </div>
+
+  <app-heroes-list *ngIf="responseArray.length"
+                   [string]="heroPage"
+                   [responseArray]="responseArray"
+  ></app-heroes-list>
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <div *ngIf="hero else loader" class="hero-card d-flex mt-5">
+    <div class="left d-flex">
+      <div class="image">
+        <img src="{{ hero.image.url }}" alt="hero">
+      </div>
+
+    </div>
+
+    <div class="right ml-3">
+      <div class="title">
+        <h1 class="hero-name">{{ hero.name }}</h1>
+      </div>
+
+      <div>
+        <h2>Power stats</h2>
+        <div class="powerstats" *ngFor="let hero of hero.powerstats | keyvalue">
+          <div>{{ hero.key.toString() | titlecase }}: <strong>{{ hero.value }}</strong></div>
+        </div>
+      </div>
+      <hr>
+      <div class="more-info" *ngFor="let key of hero.biography | keyvalue">
+        <div>{{ key.key.toString() | titlecase }}: <strong>{{ key.value }}</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #loader>
+    <mat-progress-spinner class="m-auto" mode="indeterminate"></mat-progress-spinner>
+  </ng-template>
+</div>

@@ -1,0 +1,42 @@
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.add-new-user {
+  background: dodgerblue;
+  cursor: pointer;
+  color: #fff;
+  font-size: 3rem;
+  align-self: flex-end;
+}
+.custom {
+  width: 950px;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.carousel-caption {
+  left: 50% !important;
+  right: 10% !important;
+  top: 0 !important;
+}
+.list-item {
+  list-style: none;
+  padding: 2rem;
+}
+.btn.active {
+  background: indianred !important;
+}
+
+.container {
+  max-width: 1000px;
+}
+table {
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.pointer {
+  cursor: pointer;
+}

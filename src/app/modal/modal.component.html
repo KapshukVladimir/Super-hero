@@ -1,0 +1,13 @@
+<div class="overlay" (click)="closeModal()">
+</div>
+
+<div class="modal">
+
+  <div class="modal-body">
+
+    <ng-content></ng-content>
+
+    <button class="btn-ok" [disabled]="!clickable" (click)="closeModal()">Ok</button>
+  </div>
+  <button class="btn-close" (click)="closeModal()">&times;</button>
+</div>
